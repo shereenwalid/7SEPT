@@ -1,0 +1,129 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="lld" name="Low-Level Design">
+    <mxGraphModel dx="812" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1750" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=18;fontStyle=1;align=left;verticalAlign=middle;" value="Quote-to-Order — Low-Level Design (agent API call flow)" vertex="1">
+          <mxGeometry height="30" width="800" x="60" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="gcp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontStyle=1;fontSize=12;align=left;spacingLeft=30;spacingTop=8;" value="Google Cloud Platform" vertex="1">
+          <mxGeometry height="960" width="1500" x="200" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="user" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=10;" value="G Suite User&#xa;(OAuth2 / OIDC SSO)" vertex="1">
+          <mxGeometry height="80" width="40" x="80" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="uiproj" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#82b366;verticalAlign=top;align=left;spacingLeft=10;fontSize=10;dashed=1;" value="Project: vf-ie-aib-prd-iei-cfa-lab" vertex="1">
+          <mxGeometry height="160" width="220" x="220" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="streamlit" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#999999;fontSize=10;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="Streamlit UI (Cloud Run)&#xa;&#xa;Order Entry · Processing&#xa;Validation · Results&#xa;HTTPS via AGENT_API_URL" vertex="1">
+          <mxGeometry height="115" width="190" x="235" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="beproj" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c8ebf;verticalAlign=top;align=left;spacingLeft=10;fontSize=10;dashed=1;" value="Project: vf-ie-aib-prd-iei-cfa-lab   —   Backend / AI layer (Cloud Run)" vertex="1">
+          <mxGeometry height="900" width="620" x="500" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="api" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=9;align=left;spacingLeft=8;verticalAlign=top;spacingTop=6;" value="FastAPI Service (agent_api)&#xa;&#xa;POST /process/{opp}   · run workflow&#xa;GET  /status/{opp}    · live progress&#xa;GET  /result/{opp}    · shaped result&#xa;POST /log             · session log (Begin)&#xa;POST /feedback/{opp}  · raise request&#xa;GET  /feedback/{opp}  · list requests&#xa;GET  /exists/{opp}    · opp folder check&#xa;GET  /health&#xa;retry: 429 backoff · size auto-shrink" vertex="1">
+          <mxGeometry height="190" width="300" x="520" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="adk" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eef3fb;strokeColor=#6c8ebf;verticalAlign=top;align=left;spacingLeft=10;fontSize=10;fontStyle=1;spacingTop=6;" value="ADK 2.x Orchestration — root_agent Workflow&#xa;retrieval → product_code → extraction → email" vertex="1">
+          <mxGeometry height="510" width="590" x="520" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="qto" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=9;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" value="Retrieval Agent&#xa;qto_retrieval_agent&#xa;tool: get_opportunity_data&#xa;→ output: retrieval_summary" vertex="1">
+          <mxGeometry height="80" width="230" x="560" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="pcn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" value="Product Code Navigator&#xa;product_code_agent&#xa;tool: resolve_product_code&#xa;deterministic BigQuery lookup&#xa;→ output: resolved_product_codes" vertex="1">
+          <mxGeometry height="95" width="255" x="545" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="bspx" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=9;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" value="BSP Extraction Agent&#xa;bsp_extraction_agent&#xa;fills sales order header + line items&#xa;→ output: bsp_order" vertex="1">
+          <mxGeometry height="80" width="230" x="560" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="email" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontSize=9;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" value="Email Drafter Agent&#xa;email_agent&#xa;tool: read_validation_file&#xa;→ output: email_draft" vertex="1">
+          <mxGeometry height="80" width="230" x="560" y="735" as="geometry" />
+        </mxCell>
+        <mxCell id="valagent" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" value="Validation Agent&#xa;validation_agent&#xa;runs validation checks&#xa;→ output: validation_report" vertex="1">
+          <mxGeometry height="95" width="230" x="820" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="proxy" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" value="Responsible AI Layer Proxy&#xa;ID-token (OIDC) auth&#xa;pre/post checks · governs&#xa;every model call" vertex="1">
+          <mxGeometry height="85" width="255" x="545" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="gemini" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#999999;fontSize=9;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" value="Vertex AI — Gemini&#xa;vertexai=true genai client&#xa;region: europe-west1" vertex="1">
+          <mxGeometry height="85" width="255" x="825" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="dhproj" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#82b366;verticalAlign=top;align=left;spacingLeft=10;fontSize=10;dashed=1;" value="Project: vf-ie-datahub   —   Data layer" vertex="1">
+          <mxGeometry height="420" width="500" x="1160" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="gcs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#999999;fontSize=9;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="GCS&#xa;source docs (PDF/Word/Excel) + parsed VBOP JSON + validation.json&#xa;gs://vfie-dh-customer-fixed&#xa;gs://vfie-dh-customer-complex-fixed&#xa;app logs: quote-to-order-app-logs/" vertex="1">
+          <mxGeometry height="150" width="300" x="1180" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="bq" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#999999;fontSize=9;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="BigQuery (BSP)&lt;br&gt;dataset: vfie_dh_lake_customer_complex_fixed_s&lt;br&gt;read: TEMP_PM, TEMP_item_model, raw_item_model&lt;br&gt;write: sales order + rows&lt;br&gt;access: dataEditor + jobUser" vertex="1">
+          <mxGeometry height="130" width="300" x="1180" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="user" style="html=1;endArrow=block;strokeColor=#000000;fontSize=9;rounded=0;" target="streamlit" value="1. Begin (Opportunity ID)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="streamlit" style="html=1;endArrow=block;strokeColor=#000000;fontSize=9;" target="api" value="2. GET /exists/{opp}">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="470" y="470" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="api" style="html=1;endArrow=block;dashed=1;strokeColor=#000000;fontSize=9;" target="gcs" value="3. check processed_files/{opp}/">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="streamlit" style="html=1;endArrow=block;strokeColor=#000000;fontSize=9;" target="api" value="4. POST /log  (session, user, datetime)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="470" y="490" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="api" style="html=1;endArrow=block;strokeColor=#000000;fontSize=9;" target="gcs" value="5. write app log (GCS)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="streamlit" style="html=1;endArrow=block;strokeColor=#000000;fontSize=9;" target="api" value="6. POST /process/{opp}">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="470" y="510" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="api" style="html=1;endArrow=block;strokeColor=#000000;fontSize=9;" target="qto" value="7. invoke workflow">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="qto" style="html=1;endArrow=block;startArrow=block;strokeColor=#000000;fontSize=9;" target="gcs" value="8. read VBOP / validation.json">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="qto" style="html=1;endArrow=block;startArrow=block;dashed=1;strokeColor=#b85450;fontSize=9;" target="proxy" value="9. interpret docs (LLM)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="proxy" style="html=1;endArrow=block;startArrow=block;dashed=1;strokeColor=#b85450;fontSize=9;" target="gemini" value="10. pre/post checks · call model">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="pcn" style="html=1;endArrow=block;startArrow=block;strokeColor=#000000;fontSize=9;" target="bq" value="11. deterministic lookup (SQL)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="bspx" style="html=1;endArrow=block;startArrow=block;dashed=1;strokeColor=#b85450;fontSize=9;" target="proxy" value="12. assemble order (LLM)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="email" style="html=1;endArrow=block;startArrow=block;dashed=1;strokeColor=#b85450;fontSize=9;" target="proxy" value="13. draft email (LLM) · reads validation.json">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="adk" style="html=1;endArrow=block;strokeColor=#000000;fontSize=9;" target="api" value="14. return result (order, rows, email)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="api" style="html=1;endArrow=block;strokeColor=#000000;fontSize=9;" target="bq" value="15. save sales order + rows">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="streamlit" style="html=1;endArrow=block;strokeColor=#000000;fontSize=9;" target="api" value="16. POST /feedback/{opp} (raise request)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="470" y="300" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="api" style="html=1;endArrow=block;strokeColor=#000000;fontSize=9;" target="gcs" value="17. save feedback → validation.json + update app log">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9b" edge="1" parent="1" source="valagent" style="html=1;endArrow=block;startArrow=block;dashed=1;strokeColor=#b85450;fontSize=9;" target="proxy" value="9b. run validation checks (LLM)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="leg" parent="1" style="text;html=1;fontSize=9;align=left;" value="Legend:  solid = call/data  ·  red dashed = governed LLM call (via RAI → Gemini)  ·  grey dashed = upstream/side" vertex="1">
+          <mxGeometry height="20" width="1000" x="220" y="1000" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
