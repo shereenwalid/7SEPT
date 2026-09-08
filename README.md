@@ -76,4 +76,17 @@ retry: 429 backoff · size auto-shrink
 
 ---
 
-Same three checks as before when reviewing their AI's output: no agent bypassing the RAI proxy, the BigQuery lookup not styled as an LLM call, and the parallel branch actually rendered as parallel (AI tools often flatten it into a sequential chain).
+Same three checks as before when reviewing their AI's output: no agent bypassing the RAI proxy, the BigQuery lookup not styled as an LLM call, and the parallel branch actually rendered as parallel (AI tools often flatten it into a sequential chain)
+
+
+
+.Here is a clean, standard block you can copy and paste directly into your architecture documentation.
+Component: Google Cloud Logging
+ * Architecture Overview:
+   Google Cloud Logging serves as the centralized, project-wide log management system. Application stdout and stderr streams, along with Cloud Run execution and audit logs, are ingested directly into system-managed regional Log Buckets (_Default / _Required).
+ * Purpose:
+   Captures real-time system events, application outputs, and audit logs to provide unified observability, debugging, and operational troubleshooting across all Cloud Run services.
+ * Architectural Notes & Considerations:
+   > Note: Cloud Logging stores all system and application events as a continuous stream of structured entries rather than isolated, discrete files on disk. While this allows fast querying across all application data, logs are not segregated into separate files per session. Log retention in the default bucket is set to 30 days before automatic purge; long-term archiving requires routing to Cloud Storage or BigQuery.
+   > 
+
